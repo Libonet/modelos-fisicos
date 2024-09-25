@@ -38,23 +38,23 @@ void usage(char* progName){
   printf("de velocidad desde 40%% y 50%%\n\n");
 }
 
-double resolventeSimplificada(int sumar, const double velocidad, const double dosA, const double cuatroAC){
+double max(const double a, const double b){
+  return (a > b) ? a : b;
+}
+
+double resolventeSimplificada(const double velocidad, const double dosA, const double cuatroAC){
   double dividendo;
-  if (sumar) {
-    dividendo = -velocidad + sqrt((velocidad*velocidad) - cuatroAC);
-  } else {
-    dividendo = -velocidad - sqrt((velocidad*velocidad) - cuatroAC);
+  dividendo = sqrt((velocidad*velocidad) + cuatroAC) - velocidad;
+  if (dividendo > 0) {
+    dividendo = -sqrt((velocidad*velocidad) + cuatroAC) - velocidad;
   }
   return dividendo / dosA;
 }
 
-double max(const double a, const double b){
-  return a > b ? a : b;
-}
-
 void test(double velocidad_inicial, double angulo, double perdida){
   double posicion_inicial = 0.15;
-  char *resultadoA="Sin resolver", *resultadoB="Sin resolver", *resultadoC="Sin resolver";
+  char *resultadoA="La pelota baja por las escaleras sin saltarse ningun escalon", *resultadoB="La pelota no rebota dos veces en un mismo escalon", *resultadoC=resultadoB;
+  int escalon_primer_rebote = -1;
 
   printf("TEST: velocidad inicial=%.2lf m/s; angulo=%.2lf grados; perdida=%.2lf%%\n", velocidad_inicial, angulo, perdida);
 
@@ -67,25 +67,36 @@ void test(double velocidad_inicial, double angulo, double perdida){
   const double velocidad_horizontal = velocidad_inicial * coseno;
   double velocidad_vertical = velocidad_inicial * seno;
 
-  double t1, t2, siguiente_posicion;
-  for (int escalon = 0; escalon < 8; escalon++) {
-    velocidad_vertical = velocidad_vertical * perdida/100;
+  double t, siguiente_posicion;
+  for (int escalon = 0; escalon < 8;) {
+    velocidad_vertical = velocidad_vertical * (1 - (perdida/100));
 
     // obtenemos el tiempo que falta para que rebote
-    t1 = resolventeSimplificada(1, velocidad_vertical, dosA, cuatroAC);
-    t2 = resolventeSimplificada(0, velocidad_vertical, dosA, cuatroAC);
-
-    double t = max(t1, t2);
+    t = resolventeSimplificada(velocidad_vertical, dosA, cuatroAC);
 
     // obtenemos la siguiente posicion
     siguiente_posicion = posicion_inicial + velocidad_horizontal*t;
+
+    if (escalon_primer_rebote == -1 && siguiente_posicion < ANCHO_ESCALON) {
+      resultadoB = "La pelota rebota dos veces en un mismo escalon";
+      escalon_primer_rebote = escalon+1;
+    } else if (siguiente_posicion > 2*ANCHO_ESCALON) {
+      resultadoA = "La pelota se saltea un escalon";
+    }
+
+    escalon += (siguiente_posicion / ANCHO_ESCALON)+1;
+    printf("escalon: %d\n", escalon);
+    posicion_inicial = remainder(siguiente_posicion, ANCHO_ESCALON);
   }
-  
-  
 
   printf("a) %s\n", resultadoA);
   printf("b) %s\n", resultadoB);
-  printf("c) %s\n\n", resultadoC);
+  if (escalon_primer_rebote != -1) {
+    resultadoC = "La pelota rebota sobre el escalon";
+    printf("c) %s %d 2 veces\n\n", resultadoC, escalon_primer_rebote);
+  } else {
+    printf("c) %s\n\n", resultadoC);
+  }
 }
 
 int main(int argc, char *argv[])
