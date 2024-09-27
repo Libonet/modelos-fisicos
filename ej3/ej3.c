@@ -36,11 +36,13 @@ void apartado_a1() {
   float v_0 = 60; // velocidad inicial en mi/h
   v_0 = v_0 * MI_TO_M / H_TO_S; // velocidad inicial en m/s
   
-  float t = -v_0/a; // tiempo final en s
-  printf("El tiempo requerido para que el automóvil quede en reposo con la aceleración constante dada es %.2f s\n", t);
+  float t_f = -v_0/a; // tiempo final en s
+  printf("El tiempo requerido para que el automóvil quede en reposo con la aceleración constante dada es %.2f s\n", t_f);
 
   float d = - v_0 * v_0 / (2 * a); // distancia recorrida en m, como x_0 = 0m, d es igual al valor de x(t), dado por esta ecuación.
   printf("La distancia recorrida sobre la rampa es %.2f m\n", d);
+  float d2 = v_0 * t_f + a * t_f * t_f/2; // distancia recorrida en m, como x_0 = 0m, d es igual al valor de x(t), dado por esta ecuación.
+  printf("La distancia recorrida sobre la rampa es %.2f m\n", d2);
 }
 
 void apartado_a2() {
