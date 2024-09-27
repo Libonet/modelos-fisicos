@@ -2,6 +2,10 @@
 title: "Ejercicio 3"
 geometry: margin=2cm
 output: pdf_document
+header-includes:
+  - \usepackage{graphicx}
+  - \usepackage{amsmath}
+  - \usepackage{amssymb}
 ---
 
 ## Apartado a) 1.
