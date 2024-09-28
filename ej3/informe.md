@@ -68,28 +68,26 @@ Como $v_f = 0~m/s$, resulta: $-v_0 = {1 \over 2}~m~t_f^2 + a_0~t_f$
 
 Luego podemos plantear el siguiente sistema de ecuaciones:
 
-$
+$$
 \begin{cases}
 mt_f + a_0 = a_f = 0~m/s^2\\
 {1 \over 2}~m~t_f^2 + a_0~t_f = -v_0
 \end{cases}
-$
-$\Rightarrow$
-$
+$$
+$$\Rightarrow$$
+$$
 \begin{cases}
 mt_f = -a_0\\
 {1 \over 2}~(m~t_f)~t_f + a_0~t_f = -v_0
 \end{cases}
-$
+$$
 
 Obtenemos estas ecuaciones:
 
-$$
 \begin{align}
 mt_f = -a_0\\
 {1 \over 2}~(m~t_f)~t_f + a_0~t_f = -v_0
 \end{align}
-$$
 
 Reemplazando $\it{(1)}$ en $\it{(2)}$ resulta: 
 ${1 \over 2}~(-a_0)~t_f + a_0~t_f = -v_0$
