@@ -122,7 +122,7 @@ void test(double velocidad_inicial, double angulo, double restitucion){
     }
   }
 
-  printf("rebotes: ");
+  printf("cantidad de rebotes (escalon 1 a 8): ");
   for (int i=0; i<8; i++) {
     printf("%d ", rebotes[i]);
   }
