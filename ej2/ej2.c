@@ -97,13 +97,11 @@ void test(double velocidad_inicial, double angulo, double restitucion){
   // asumimos un primer rebote en 0.15m.
   rebotes[0] = 1;
 
-  double t, distancia=0, siguiente_posicion, diff_escalon;
+  double t, distancia=0, siguiente_posicion, diff_escalon=0;
   int escalon_previo=0;
-
-
   // reviso si rebota en el mismo escalon.
   for (int escalon = 0; escalon < 8;) {
-    t = resolver_tiempo(escalon*(-ALTURA_ESCALON), velocidad_vertical);
+    t = resolver_tiempo((diff_escalon+1)*(-ALTURA_ESCALON), velocidad_vertical);
 
     distancia = posicion_inicial + velocidad_horizontal*t;
 
@@ -112,6 +110,7 @@ void test(double velocidad_inicial, double angulo, double restitucion){
       velocidad_vertical *= restitucion;
       posicion_inicial = distancia;
       escalon_previo = escalon;
+      diff_escalon = (escalon - escalon_previo);
       // calculo en una nueva parabola.
     } else {
       // No rebota en este escalon, chequeamos el siguiente
@@ -119,8 +118,6 @@ void test(double velocidad_inicial, double angulo, double restitucion){
       escalon += distancia / ANCHO_ESCALON;
       // movemos el origen al siguiente escalon
       diff_escalon = (escalon - escalon_previo);
-      if (diff_escalon > 1) {
-      }
       posicion_inicial = posicion_inicial - diff_escalon*ANCHO_ESCALON;
     }
   }
