@@ -57,3 +57,4 @@ $$
     -\dot{f}(t),& \text{si } \sin(\phi(t)) < \frac{l}{r}
 \end{cases}
 $$
+
