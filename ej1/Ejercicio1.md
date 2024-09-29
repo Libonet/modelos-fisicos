@@ -40,14 +40,8 @@ $$ \sin(\phi(t)) \ge \frac{l}{r}$$
 
 Por lo tanto nos queda:
 
-$$\theta(t) = \begin{cases}
-           f(t)  &\text{si } \sin(\phi(t)) \ge \frac{l}{r}\\
-           2\pi-f(t) &\text{si } \sin(\phi(t)) \lt \frac{l}{r}
-              \end{cases}$$
+![alt text](image-1.png)
 
 Y también:
 
-$$\.\theta(t)= \begin{cases}
-           \.f(t)  &\text{si } \sin(\phi(t)) \ge \frac{l}{r}\\
-           -\.f(t) &\text{si } \sin(\phi(t)) \lt \frac{l}{r}
-              \end{cases}$$
+![alt text](image-2.png)
