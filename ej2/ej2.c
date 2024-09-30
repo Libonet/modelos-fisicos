@@ -5,8 +5,8 @@
 
 #include <math.h>
 
-#define ANCHO_ESCALON 0.3 //cm
-#define ALTURA_ESCALON 0.15 // cm
+#define ANCHO_ESCALON 0.3 // m
+#define ALTURA_ESCALON 0.15 // m
 
 double get_double(const char* input){
   char *endptr = NULL;
@@ -58,8 +58,20 @@ double resolver_tiempo(double const altura, double const velocidad){
   return tiempo;
 }
 
+// Desparametrizamos las ecuaciones del tiro parabolico
+// x(t) = x0 + v0*seno(ang)*t
+// y(t) = y0 + v0*cos(ang)*t - 1/2 g t^2
+//
+// y(t) = y0 + t (v0*cos(ang) - g/2 t)
+// y(t) = 0 => t = v0*cos(ang) / (g/2)
+//
+// x-x0 / v0*seno(ang) = t
+// y(x) = cot(ang)*(x-x0) - g/2 * (x-x0 / v0*seno(ang))^2
+// y(d) = cot(ang)*(d-x0) - (g/2) * (d-x0)^2 / (v*seno(ang))^2
+// y(d) = 0 => cot(ang)*(d-x0) = (g/2) * (d-x0)^2 / (v*seno(ang))^2
+// d = (v^2*seno(ang)*cos(ang) / (g/2)) + x0
 double distancia_parabola(const double velocidad, const double sen_angulo, const double cos_angulo, const double posicion_inicial, const double restitucion){
-  return ((pow(restitucion, 3.0) * pow(velocidad, 2.0) * sen_angulo * cos_angulo) / (4.9)) + posicion_inicial; // 4.9 == g/2
+  return ((pow(velocidad, 2.0) * sen_angulo * cos_angulo) / (4.9)) + posicion_inicial; // 4.9 == g/2
 }
 
 void test(double velocidad_inicial, double angulo, double restitucion){
@@ -68,23 +80,6 @@ void test(double velocidad_inicial, double angulo, double restitucion){
   int escalon_doble_rebote = -1;
 
   printf("TEST: velocidad inicial=%.2lf m/s; angulo=%.2lf grados; restitucion=%.1lf\n", velocidad_inicial, angulo, restitucion);
-
-  // Desparametrizamos las ecuaciones del tiro parabolico
-  // x(t) = x0 + v0*seno(ang)*t
-  // y(t) = y0 + v0*cos(ang)*t - 1/2 g t^2
-  //
-  // y(t) = y0 + t (v0*cos(ang) - g/2 t)
-  // y(t) = 0 => t = v0*cos(ang) / (g/2)
-  //
-  // x-x0 / v0*seno(ang) = t
-  // y(x) = cot(ang)*(x-x0) - g/2 * (x-x0 / v0*seno(ang))^2
-  // y(d) = cot(ang)*(d-x0) - (g/2) * (d-x0)^2 / (v*seno(ang))^2
-
-  // y(d) = 0 => cot(ang)*(d-x0) = (g/2) * (d-x0)^2 / (v*seno(ang))^2
-  // d = (v^2*seno(ang)*cos(ang) / (g/2)) + x0
-  //
-  // y(d) = -0.15 => cot(ang) = ((g/2) * (d-x0) / (v*seno(ang))^2) - 0.15/(d-x0)
-  // no puedo sacar d para un valor de y(d) distinto a 0.
 
   const double rad_angulo = (angulo * M_PI) / 180.0;
   const double coseno = cos(rad_angulo), seno = sin(rad_angulo);
