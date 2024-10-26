@@ -1,5 +1,5 @@
 ---
-title: "Ejercicio 3"
+title: "Ejercicio 2"
 geometry: margin=2cm
 output: pdf_document
 header-includes:
@@ -8,121 +8,59 @@ header-includes:
   - \usepackage{amssymb}
 ---
 
-## Apartado a) 1.
+## Apartado a)
 
-En este caso sabemos que la aceleración es constante y el auto se mueve sobre una rampa recta, por ende el movimiento es un MRUV.
+Tenemos que un satélite se ubica en una órbita circular, por lo cual la fuerza de gravedad F que la tierra ejerce sobre el satélite es normal a la órbita, y se tiene que $F = {GMm \over r²}$, donde G es la constante de gravitación universal, M es la masa de la tierra, m es la masa del satélite y r es la distancia del satélite al centro de la tierra.
 
-Del enunciado sacamos los siguientes datos:
+También podemos escribir $F = ma$, y como $a = {v² \over r}$ obtenemos $F = {GMm \over r²} = m {v² \over r}$, de donde $v² = {GM \over r}$.
 
-* $v_0 = 60~mi/h$ (velocidad inicial)
-* $v_f = 0~mi/h$ (velocidad final)
-* $a(t) = cte = -10~ft/s^2$ (aceleración)
+Además sabemos que $GM = gR²$, donde R es el radio de la tierra y g la aceleración de la gravedad, por lo cual escribimos $v² = {gR² \over r}$. Finalmente, despejamos la velocidad $v = R \sqrt{g \over r} = \sqrt{GM \over r}$ con la cual el satélite describe su órbita.
 
-El programa se encarga de convertir estos valores al sistema USI.
+Además, la velocidad con la cual el satélite describe su órbita es $v = {2 \pi r\over T}$, donde T es el período (que tenemos como dato, T = 23.934 h). Luego, $R \sqrt{g \over r} = {2 \pi r\over T} \Rightarrow T = {2 \pi r \over {R \sqrt{g \over r}}}$
 
-Queremos calcular el tiempo $t_f$ requerido para que el automóvil quede en reposo y la distancia $d$ que recorre sobre la rampa.
+Para los siguientes cálculos utilizaremos estos valores de las constantes g y R:
 
-Tomamos como tiempo inicial $t_0 = 0~s$ y la posición inicial $x_0 = 0 m$. Luego, la distancia recorrida será $d = x(t_f)$.
+* $g = 9.81~m/s² = 127137.6~km/h²$
+* $R = 6.37~.~10⁶~m = 6370~km$
 
-Como estamos en un MRUV, se cumple la siguiente ecuación: $v(t_f) = v_f = v_0 + a(t_f)(t_f - t_0)$. 
+Ahora planteamos:
 
-Como $v_f = 0~m/s$ y $t_0 = 0~s$, resulta: $v_0 + a(t_f) t_f = 0~m/s$.
-
-Trabemos algebráicamente la expresión: $v_0 + a(t_f) t_f = 0~m/s$ $\Rightarrow$ $a(t_f) t_f = -v_0$ $\Rightarrow$ $t_f = -v_0/a(t_f)$.
-
-Por lo tanto, obtuvimos
-$$\bold{t_f = {-v_0 \over a(t_f)}}$$
-
-Ahora queremos calcular $d = x(t_f)$. Por estar en un MRUV tenemos que se cumple esta ecuación: $x(t_f) = x_0 + v_0 (t_f - t_0) + {1 \over 2} a(t_f) (t_f - t_0)^2$.
-
-Como $t_0 = 0~s$ y $x_0 = 0~m$, resulta: $x(t_f) = v_0 t_f + {1 \over 2} a(t_f) t_f^2$.
-
-Finalmente, como $d = x(t_f)$, obtuvimos 
-$$\bold{d =v_0~t_f + {1 \over 2}~a(t_f)~t_f^2}$$
-
-## Apartado a) 2.
-
-En este caso tenemos que la aceleración varía linealmente, por lo cual su ecuación tiene la forma $a(t) = mt + a_0$, siendo $a_0 = -10~ft/s^2$ y $a_f = a(t_f) = 0~m/s^2$.
-
-Nuevamente queremos calcular el tiempo $t_f$ y la distancia $d$ con las definiciones hechas en el apartado anterior.
-
-Tenemos que 
-$a(t) = {dv \over dt}$ 
-$\Rightarrow$
-$dv = {a(t)~dt}$ 
-$\Rightarrow$
-$\int_{v_0}^{v_f} dv = \int_{t_0}^{t_f} a(t)~dt$
-$\Rightarrow$
-$\int_{v_0}^{v_f} dv = \int_{t_0}^{t_f} (mt+a_0)~dt$
-
-Como $t_0 = 0~s$, resulta: 
-$\int_{v_0}^{v_f} dv = m\int_{0}^{t_f} t~dt + \int_{0}^{t_f} a_0~dt$
-$\Rightarrow$
-$\left[v\right]_{v_0}^{v_f} = {m \over 2} \left[ t^2 \right]_{0}^{t_f} + a_0 \left[t\right]_{0}^{t_f}$
-$\Rightarrow$
-$v_f-v_0 = {1 \over 2}~m~t_f^2 + a_0~t_f$
-$\Rightarrow$
-$v_f = v(t_f) = v_0 +{1 \over 2}~m~t_f^2 + a_0~t_f$
-
-Como $v_f = 0~m/s$, resulta: $-v_0 = {1 \over 2}~m~t_f^2 + a_0~t_f$
-
-Luego podemos plantear el siguiente sistema de ecuaciones:
-
-$$
-\begin{cases}
-mt_f + a_0 = a_f = 0~m/s^2\\
-{1 \over 2}~m~t_f^2 + a_0~t_f = -v_0
-\end{cases}
-$$
+$$T = 23.934~h = {2 \pi \over R} {r \over \sqrt{g \over r}}$$
 $$\Rightarrow$$
-$$
-\begin{cases}
-mt_f = -a_0\\
-{1 \over 2}~(m~t_f)~t_f + a_0~t_f = -v_0
-\end{cases}
-$$
+$${r \over \sqrt{g \over r}} = 24264.7~km~h$$
+$$\Rightarrow$$
+$${r² \over {g \over r}} = 588775461.2~km²~h²$$
+$$\Rightarrow$$
+$${r³ \over g} = 588775461.2~km²~h²$$
+$$\Rightarrow$$
+$$r³ = 588775461.2~km²~h² * 127137.6~km/h² = 7.49~.~10^{13}~km³$$
+$$\Rightarrow$$
+$$r = \sqrt[3]{7.49~.~10^{13}~km³}$$
+$$\Rightarrow$$
+$$r = 42144.53~km$$
 
-Obtenemos estas ecuaciones:
+Obtuvimos que la distancia del satélite al centro de la tierra es $r = 42144.53~km$. Nosotros queremos calcular la distancia $d$ del satélite a la superficie terrestre, que será $d = r - R = (42144.53 - 6370)~km$.
 
-\begin{align}
-mt_f = -a_0\\
-{1 \over 2}~(m~t_f)~t_f + a_0~t_f = -v_0
-\end{align}
+Por lo tanto, al distancia del satélite a la superficie de la tierra es
 
-Reemplazando $\it{(1)}$ en $\it{(2)}$ resulta: 
-${1 \over 2}~(-a_0)~t_f + a_0~t_f = -v_0$
-$\Rightarrow$
-$a_0~t_f - {1 \over 2}~a_0~t_f = -v_0$
-$\Rightarrow$
-${1 \over 2}~a_0~t_f = -v_0$
-$\Rightarrow$
-$a_0~t_f = -2v_0$
-$\Rightarrow$
-$t_f = -2{v_0 \over a_0}$
+$$\bold{d = 35774.53~km = 22229.26~mi}$$
 
-Por lo tanto, obtuvimos que 
-$$\bold{t_f = -2{v_0 \over a_0}}$$
+En unidades del USI y de uso común en Estados Unidos resulta
 
-Y despejamos la pendiente $m = -{a_0 \over t_f}$.
+$$\bold{d = 35774530~m = 117370492.8~ft}$$
 
-Ahora nos queda calcular la distancia recorrida sobre la rampa. Para ello debemos obtener la ecuación del desplazamiento.
+## Apartado b)
 
-Partamos de que: 
-$v(t) = {dx \over dt}$ 
-$\Rightarrow$
-$dx = {v(t)~dt}$ 
-$\Rightarrow$
-$\int_{x_0}^{x_f} dx = \int_{t_0}^{t_f} v(t)~dt$
-$\Rightarrow$
-$\int_{x_0}^{x_f} dx = \int_{t_0}^{t_f} (v_0 +{1 \over 2}~m~t^2 + a_0~t)~dt$
+En el apartado anterior dijimos que $v = {2 \pi r\over T}$. Luego:
 
-Como $t_0 = 0~s$ y $x_0 = 0~m$, resulta:
-$\int_{0}^{x_f} dx = v_0 \int_{0}^{t_f} dt +{1 \over 2}~m \int_{0}^{t_f} t^2~dt + a_0 \int_{0}^{t_f} t~dt$
-$\Rightarrow$
-$\left[x\right]_{0}^{x_f} = v_0 \left[t\right]_{0}^{t_f} + {m \over 6} \left[ t^3 \right]_{0}^{t_f} + {a_0 \over 2} \left[ t^2 \right]_{0}^{t_f}$
-$\Rightarrow$
-$x_f = v_0~t_f + {a_0 \over 2} t_f^2 + {m \over 6}~t_f^3$
+$$v = 2 \pi {42144.53~km\over 23.934~h}$$
+$$\Rightarrow$$
+$$v = 2 \pi~1760.86~km/h$$
 
-Por lo tanto, como $d = x_f = x(t_f)$, obtuvimos:
+Finalmente, resulta
 
-$$\bold{d = v_0~t_f + {a_0 \over 2} t_f^2 + {m \over 6}~t_f^3}$$
+$$\bold{v = 11063.84~km/h = 6874.75~mi/h}$$
+
+En unidades del USI y de uso común en Estados Unidos resulta
+
+$$\bold{v = 3073.29~m/s = 10082.97~ft/s}$$
