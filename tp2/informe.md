@@ -118,3 +118,54 @@ $$\bold{v = 11063.84~km/h = 6874.75~mi/h}$$
 En unidades del USI y de uso común en Estados Unidos resulta
 
 $$\bold{v = 3073.29~m/s = 10082.97~ft/s}$$
+
+
+# Ejercicio 3
+
+Queremos encontrar los valores de $\theta$ para los cuales el bloque pierde el contacto
+con la superficie, con un coeficiente de fricción cinética desde 0 hasta 0,4.
+
+Eso significa que queremos encontrar los valores de $\theta$ para los cuales $N = 0$ (la normal)
+
+Cosas que sabemos:
+
+$$N + m.g.\cos{\theta} = {m.(v_{\theta})^2 \over r}$$
+
+$$N = 0 = {m.(v_{\theta})^2 \over r} - m.g.\cos{\theta} = m({v_{\theta}^2 \over r} - g.\cos{\theta})$$
+
+$${v_{\theta}^2 \over r} = g.\cos{\theta} \implies {v_{\theta}^2 \over \cos{\theta}} = r.g$$
+
+necesitamos encontrar $v_{\theta}^2$
+
+### ENERGIA
+
+$$W_{fnc} = \Delta E$$
+
+$$E = {1 \over 2} m.v^2 + m.g.y$$
+
+$$F_r = \mu_c * N = \mu_c * P * \cos{\theta}$$
+
+$$W_{fnc} = W_{roce} = F_r * longitudArco = F_r * \theta*r$$
+
+$$W_{fnc} = E_{\theta} - E_0$$
+
+$$F_r*\theta*r = {1 \over 2} m.v_{\theta}^2 + m.g.y_{\theta} - {1 \over 2} m.v_0^2 - m.g.y_0$$
+
+$${1 \over 2} m.v_{\theta}^2 = {1 \over 2} m.v_0^2 + m.g.(y_0 - y_{\theta}) + F_r*\theta*r $$
+
+$$m.v_{\theta}^2 = m.v_0^2 + 2.m.g.(y_0-y_{\theta}) + 2*F_r*\theta*r$$
+
+
+
+### otras cosas...
+
+$$a_t = {P*\sin{\theta} - F_r \over m} = g*\sin{\theta} - \mu_c * g * \cos{\theta} = g*(\sin{\theta} - \mu_c * \cos{\theta})$$
+
+$$v_{\theta} = v_0 + \int{a_t * d\theta}$$
+
+$$v_{\theta} = v_0 - g * (cos{\theta} + \mu_c * \sin{\theta})$$
+
+Luego:
+
+$$\theta = \cos^{-1}{({(v_0 - g * (cos{\theta} + \mu_c * \sin{\theta}))^2 \over r*g})}$$
+
