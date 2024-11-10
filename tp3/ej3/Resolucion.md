@@ -9,7 +9,7 @@ Nuestro objetivo consiste en obtener la fuerza normal sobre los puntos A y B en 
 Sabemos que la barra se está moviendo hacia abajo aceleradamente, por lo tanto sabemos (por segunda ley de Newton)
 que la suma de las fuerzas en Y son:
 
-$$m * \overline{a} = N_A + - P$$
+$$m * - \overline{a} = N_A + - P$$
 
 por lo tanto tenemos que:
 
@@ -55,11 +55,11 @@ Fuente para momento de inercia de la vara (problema resuelto 16.10 del libro):
 ![alt text](Imagen_2_texto.PNG )
 
 
-![alt text](Imagen_3_inercia.PNG )
+![alt text](Imagen_3_Inercia.PNG )
 
 Y entonces podemos plantear lo siguiente:
 
-![alt text](Imagen_4_igualdad.PNG )
+![alt text](Imagen_4_Igualdad.PNG )
 
 De lo cual podemos concluir:
 
