@@ -127,17 +127,23 @@ con la superficie, con un coeficiente de fricción cinética desde 0 hasta 0,4.
 
 Eso significa que queremos encontrar los valores de $\theta$ para los cuales $N = 0$ (la normal)
 
+### Diagrama de cuerpo libre
+
+![diagrama_cuerpo_libre](./ej3/ej3_diagrama_cuerpo_libre.jpeg)
+
 Cosas que sabemos:
 
-$$N + m.g.\cos{\theta} = {m.(v_{\theta})^2 \over r}$$
+Teniendo en cuenta que el bloque se encuentra en un movimiento circular podemos afirmar que: 
 
-$$N = 0 = {m.(v_{\theta})^2 \over r} - m.g.\cos{\theta} = m({v_{\theta}^2 \over r} - g.\cos{\theta})$$
+$$N = m.a = m.(g.\cos{\theta} - {(v_{\theta})^2 \over r})$$
+
+$$N = 0 = m.(g.\cos{\theta} - {(v_{\theta})^2 \over r}) = g.\cos{\theta} - {v_{\theta}^2 \over r}$$
 
 $${v_{\theta}^2 \over r} = g.\cos{\theta} \implies {v_{\theta}^2 \over \cos{\theta}} = r.g$$
 
-necesitamos encontrar $v_{\theta}^2$
+Por lo que necesitamos encontrar $v_{\theta}^2$
 
-### ENERGIA
+#### Acercamiento a través de la energía
 
 $$W_{fnc} = \Delta E$$
 
@@ -145,27 +151,83 @@ $$E = {1 \over 2} m.v^2 + m.g.y$$
 
 $$F_r = \mu_c * N = \mu_c * P * \cos{\theta}$$
 
-$$W_{fnc} = W_{roce} = F_r * longitudArco = F_r * \theta*r$$
+$$W_{fnc} = W_{roce} = \int_0^{\theta}{F_r * d\theta} = \mu_c * P * \int_0^{\theta}{\cos{\theta} * d\theta} = \mu_c * P * \sin{\theta}$$
 
 $$W_{fnc} = E_{\theta} - E_0$$
 
-$$F_r*\theta*r = {1 \over 2} m.v_{\theta}^2 + m.g.y_{\theta} - {1 \over 2} m.v_0^2 - m.g.y_0$$
+$$\mu_c * P * \sin{\theta} = {1 \over 2} m.v_{\theta}^2 + m.g.y_{\theta} - {1 \over 2} m.v_0^2 - m.g.y_0$$
 
-$${1 \over 2} m.v_{\theta}^2 = {1 \over 2} m.v_0^2 + m.g.(y_0 - y_{\theta}) + F_r*\theta*r $$
+$${1 \over 2} m.v_{\theta}^2 = {1 \over 2} m.v_0^2 + m.g.(y_0 - y_{\theta}) + \mu_c * P * \sin{\theta}$$
 
-$$m.v_{\theta}^2 = m.v_0^2 + 2.m.g.(y_0-y_{\theta}) + 2*F_r*\theta*r$$
+$$m.v_{\theta}^2 = m.v_0^2 + 2.m.g.(y_0-y_{\theta}) + 2*\mu_c * P * \sin{\theta}$$
+
+Ademas $y_{\theta} = r.\cos{\theta}$
+
+$$v_{\theta}^2 = v_0^2 + 2.g.(y_0-y_{\theta}) + 2*\mu_c * g * \sin{\theta}$$
+
+Por lo tanto:
+
+$${v_0^2 + 2.g.(y_0-y_{\theta}) + 2*\mu_c * g * \sin{\theta} \over \cos{\theta}} - r.g = 0$$
+
+Luego, resolvemos esta ecuacion buscando el valor de $\theta$, en un programa en python, para cada valor de $\mu_c$ entre 0 y 0.4
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constantes
+g = 9.8  # Gravedad
+r = 1.524  # Radio
+v0 = 3.5**2  # Velocidad inicial
+m = 0.45 # Masa
+energia_inicial = (1/2) * v0 * m + m * g * r
+
+# Magnitud del roce
+def Fr(mu, theta):
+    return mu * g * m * np.cos(theta)
+
+# Altura cuando el bloque esta en el angulo theta
+def altura(theta):
+    return r * np.cos(theta)
+
+def potencial(theta):
+    return  m * g * altura(theta)
+
+def W_fnc(mu,theta):
+    return Fr(mu, theta) * theta * r
+
+def velocidad_cuadrado(mu, theta):
+    return v0 + 2*g*(r - altura(theta)) + 2*mu*g* np.sin(theta)
 
 
+radianes = np.linspace(0, np.pi / 2, 100)  # Valores de radianes de 0 a pi/2
+coeficientes = np.linspace(0, 0.4, 100)  # Valores de mu en el rango [0, 0.4]
 
-### otras cosas...
+# Listas para almacenar los puntos que cumplen la igualdad
+x_points = []
+y_points = []
 
-$$a_t = {P*\sin{\theta} - F_r \over m} = g*\sin{\theta} - \mu_c * g * \cos{\theta} = g*(\sin{\theta} - \mu_c * \cos{\theta})$$
+# Comprobación de la igualdad
+for mu in coeficientes:
+    for theta in radianes:
+        division = (m*g) - (velocidad_cuadrado(mu, theta) / np.cos(theta)) 
+        if np.isclose(division,0, atol=1):  # Tolerancia para la comparación
+            x_points.append(mu)
+            y_points.append(theta)
 
-$$v_{\theta} = v_0 + \int{a_t * d\theta}$$
+# Graficar los puntos que cumplen la igualdad
+plt.figure(figsize=(10, 6))
+plt.plot(x_points, y_points, color='b', label=r'$\theta(\mu_c)$')
+plt.xlabel('Coeficiente de rozamiento')
+plt.ylabel('Theta crítico')
+plt.title('Donde se desprende el bloque')
+plt.xlim(0, 0.4)
+plt.ylim(0, np.pi / 2)
+plt.grid()
+plt.savefig("grafica.png")
+```
 
-$$v_{\theta} = v_0 - g * (cos{\theta} + \mu_c * \sin{\theta})$$
+Lamentablemente las conclusiones parecieran haber sido erroneas, puesto que la gráfica no
+presenta valores para los cuales el bloque se separe de la superficie.
 
-Luego:
-
-$$\theta = \cos^{-1}{({(v_0 - g * (cos{\theta} + \mu_c * \sin{\theta}))^2 \over r*g})}$$
 

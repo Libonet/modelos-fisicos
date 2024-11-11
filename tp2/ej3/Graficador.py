@@ -23,7 +23,7 @@ def W_fnc(mu,theta):
     return Fr(mu, theta) * theta * r
 
 def velocidad_cuadrado(mu, theta):
-    return (2/m) * (energia_inicial + W_fnc(mu,theta) - potencial(theta))
+    return v0 + 2*g*(r - altura(theta)) + 2*mu*g* np.sin(theta)
 
 
 radianes = np.linspace(0, np.pi / 2, 100)  # Valores de radianes de 0 a pi/2
@@ -36,9 +36,9 @@ y_points = []
 # Comprobación de la igualdad
 for mu in coeficientes:
     for theta in radianes:
-        division = (velocidad_cuadrado(mu, theta) / np.cos(theta)) - m * g 
+        division = (m*g) - (velocidad_cuadrado(mu, theta) / np.cos(theta)) 
         print(division)
-        if np.isclose(division,0, atol=1e-1):  # Tolerancia para la comparación
+        if np.isclose(division,0, atol=1):  # Tolerancia para la comparación
             x_points.append(mu)
             y_points.append(theta)
 
@@ -49,7 +49,7 @@ plt.plot(x_points, y_points, color='b', label=r'$\theta(\mu_c)$')
 plt.xlabel('Coeficiente de rozamiento')
 plt.ylabel('Theta crítico')
 plt.title('Donde se desprende el bloque')
-plt.xlim(0, np.pi / 2)
-plt.ylim(0, 0.4)
+plt.xlim(0, 0.4)
+plt.ylim(0, np.pi / 2)
 plt.grid()
-plt.show()
+plt.savefig("grafica.png")
