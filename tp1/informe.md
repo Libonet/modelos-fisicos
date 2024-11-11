@@ -2,6 +2,7 @@
 title: "Primer TP modelos fisicos"
 geometry: margin=2cm
 output: pdf_document
+colorlinks: true
 header-includes:
   - \usepackage{graphicx}
   - \usepackage{amsmath}
@@ -68,6 +69,8 @@ $$
 \end{cases}
 $$
 
+Link al gráfico en geogebra: [gráfico de mecanismo de retorno rápido de Whitworth](https://www.geogebra.org/m/d9xpeydh)
+
 ## Ejercicio 2
 
 La pelota al dejarse caer por los escalones describe una serie de parábolas que podemos calcular de esta manera:
@@ -87,7 +90,7 @@ De esta manera, la altura inicial $y_0$ siempre es 0.
 Para determinar si la pelota cae en el escalón en el que estamos "parados" obtenemos el tiempo que tarda en caer hasta la altura del escalón y revisamos si no superó el ancho del escalón.
 
 $$
-tiempo = max {-velocidad \pm \sqrt{velocidad^2 - 4 * (-g/2) * -altura} \over 2 * (-g/2)}
+tiempo = max({-velocidad \pm \sqrt{velocidad^2 - 4 * (-g/2) * -altura} \over 2 * (-g/2)})
 $$
 
 Si encontramos que la pelota rebota en el mismo escalón, mantenemos el eje, pero al momento de superarlo y caer cambiamos nuestro eje por el del nuevo escalón, modificando $x_0$ para contemplar el cambio de eje, y calculamos dónde rebota en el mismo.
