@@ -92,7 +92,7 @@ $$\bold{v = {v_0~e^{-{qL \over m_0v_0}}}}$$
 
 ## Ejercicio 2
 
-![locomotora](./imagen_ej2.png)
+![locomotora](ej2/imagen_ej2.png)
 
 Una locomotora A de 80 Mg que viaja a 6.5 km/h choca con un carro plataforma C
 de 20 Mg que transporta una carga B de 30 Mg, la cual puede deslizarse a lo largo
@@ -143,7 +143,7 @@ $$v_{final} = {m_A*v_A \over (m_A + m_B + m_C)} = {80Mg*6.5{km \over h} \over 80
 
 # Ejercicio 3
 
-![alt text](Imagen_0_ejercicio.PNG )
+![alt text](ej3/Imagen_0_ejercicio.PNG )
 
 ### Parte 1
 
@@ -176,7 +176,7 @@ la velocidad angular del CRI se puede calcular y es:
 
 $$\omega = \frac{v_A} {L\cos(\theta)}$$
 
-![alt text](Imagen_1_CRI.PNG )
+![alt text](ej3/Imagen_1_CRI.PNG )
 
 sabiendo esto tenemos (por teorema del seno) que:
 
@@ -195,14 +195,14 @@ $$I = \frac{1}{12} * m * L^2$$
 
 Fuente para momento de inercia de la vara (problema resuelto 16.10 del libro):
 
-![alt text](Imagen_2_texto.PNG )
+![alt text](ej3/Imagen_2_texto.PNG )
 
 
-![alt text](Imagen_3_Inercia.PNG )
+![alt text](ej3/Imagen_3_Inercia.PNG )
 
 Y entonces podemos plantear lo siguiente:
 
-![alt text](Imagen_4_Igualdad.PNG )
+![alt text](ej3/Imagen_4_Igualdad.PNG )
 
 De lo cual podemos concluir:
 
@@ -220,7 +220,7 @@ Para eso vamos a utilizar el código realizado y indicaremos cuando $N_B$ es 0.
 
 Los resultados entonces son los siguientes:
 
-![alt text](Imagen_5_original.PNG )
+![alt text](ej3/Imagen_5_original.PNG )
 
 
 # ...¿Que pasó?
@@ -229,4 +229,4 @@ Luego de discutirlo con un par de compañeros, llegamos a la conclusión de que 
 
 Si tenemos en cuenta el error y ponemos la velocidad del ejercicio en inglés, tenemos:
 
-![alt text](Imagen_6_correcto.PNG )
+![alt text](ej3/Imagen_6_correcto.PNG )
