@@ -92,7 +92,7 @@ $$\bold{v = {v_0~e^{-{qL \over m_0v_0}}}}$$
 
 \newpage
 
-## Ejercicio 2
+# Ejercicio 2
 
 ![enunciado ej2](ej2/imagen_ej2.png)
 
@@ -107,7 +107,7 @@ a) Inmediatamente después del impacto
 b) Después de que la carga se ha deslizado con relación al carro plataforma hasta llegar a un
 tope.
 
-### apartado a)
+## apartado a)
 
 Consideramos al sistema que integran A, B, y C como un sistema aislado, 
 puesto que no hay fuerzas externas significativas que afecten a las locomotoras.  
@@ -116,7 +116,7 @@ por lo que se anulan y no afectan al movimiento del sistema.
 
 Por lo tanto solo necesitamos considerar el efecto que tienen las partículas entre ellas.
 
-#### Diagrama de cuerpo libre de la carga
+### Diagrama de cuerpo libre de la carga
 
 ![diagrama cuerpo libre ej2](./ej2/dcl_ej2.png ){ width=250px }
 
@@ -156,7 +156,7 @@ A partir de esta ecuación despejamos la velocidad del carro plataforma C
 $$v_{choque} = {m_A*v_A \over (m_A + m_C)} = {80Mg*6.5{km \over h} \over 80Mg + 20Mg}
              = {26{km \over h} \over 5} = 5,2{km \over h}$$
 
-### apartado b)
+## apartado b)
 
 Ahora nos encontramos en el momento en que la carga se deslizó con relación al carro plataforma hasta llegar a un tope. Esto quiere decir que la partícula B estuvo en movimiento y la fricción entre B y C actuó hasta que B y C comenzaron a moverse a la misma velocidad (cuando llega al tope) junto al resto del sistema.
 
@@ -175,7 +175,7 @@ $$v_{final} = {m_A*v_A \over (m_A + m_B + m_C)} = {80Mg*6.5{km \over h} \over 80
 
 ![enunciado ej3](ej3/Imagen_0_ejercicio.PNG )
 
-### Parte 1
+## Parte 1
 
 Nuestro objetivo consiste en obtener la fuerza normal sobre los puntos A y B en función del angulo theta.
 
@@ -243,7 +243,7 @@ y por lo tanto:
 
 $$N_B = \frac{\frac{1}{2} * m * L (g - \overline{a}) * \sin(\theta) - \frac{1}{12} m * L^2 \alpha }{L * \cos(\theta)}$$
 
-### Parte 2
+## Parte 2
 
 Para poder determinar en que momento se separa la vara de la pared, solo debemos encontrar cuando la normal de B se vuelve 0.
 Para eso vamos a utilizar el código realizado y indicaremos cuando $N_B$ es 0.
@@ -260,3 +260,65 @@ Luego de discutirlo con un par de compañeros, llegamos a la conclusión de que 
 Si tenemos en cuenta el error y ponemos la velocidad del ejercicio en inglés, tenemos:
 
 ![Grafica del angulo de separacion con 1.5m/s](ej3/Imagen_6_correcto.PNG ){ width=450px }
+
+
+### Codigo para las gráficas
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constantes
+g = 9.8  # Gravedad
+L = 0.45 # Longitud de la vara
+VA = 1.5 # Velocidad de A
+m = 5 # Masa
+
+
+def omega(theta):
+    return VA/ (L * np.cos(theta))
+
+def alpha(theta):
+    return omega(theta)**2 * np.tan(theta)
+
+def aceleracion(theta):
+    return (L * (omega(theta)**2)) / (2 * np.cos(theta))
+
+def normalEnA(theta):
+    return m * (g - aceleracion(theta))
+
+def normalEnB(theta):
+    return ((1/2) * m * L * (g - aceleracion(theta)) * np.sin(theta) - (1/12) * m * L**2 * alpha(theta))/(L * np.cos(theta))
+
+radianes = np.linspace(0, 50 * (np.pi/180), 10000)  # Valores de radianes de 0 a pi/2
+
+thetas = []
+Normales_A = []
+Normales_B = []
+ang_separacion = 0
+# Comprobación de la igualdad
+for theta in radianes:
+    norm_A = normalEnA(theta)
+    norm_B = normalEnB(theta)
+
+    thetas.append(theta)
+    Normales_A.append(norm_A)
+    Normales_B.append(norm_B)
+    
+    if np.isclose(norm_B,0, atol=1e-2):
+        ang_separacion = theta
+
+# Graficar los puntos que cumplen la igualdad
+plt.figure(figsize=(10, 6))
+plt.plot(thetas, Normales_A, color='b', label="Normal de A")
+plt.plot(thetas, Normales_B, color='r', label="Normal de B")
+plt.plot(ang_separacion, 0, color="g", label="Angulo de separación. (%.5f)" %(ang_separacion))
+plt.plot(ang_separacion,0,'go') 
+plt.xlabel('Angulo')
+plt.ylabel('Valor de la normal')
+plt.xlim(0, 50 * (np.pi/180))
+plt.ylim(-10, 40)
+plt.grid()
+plt.legend()
+plt.show()
+```
