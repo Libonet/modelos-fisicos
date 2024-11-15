@@ -90,18 +90,20 @@ Por lo tanto, la rapidez del vagón al dejar atrás el conducto es:
 
 $$\bold{v = {v_0~e^{-{qL \over m_0v_0}}}}$$
 
+\newpage
+
 ## Ejercicio 2
 
-![locomotora](ej2/imagen_ej2.png)
+![enunciado ej2](ej2/imagen_ej2.png)
 
 Una locomotora A de 80 Mg que viaja a 6.5 km/h choca con un carro plataforma C
-de 20 Mg que transporta una carga B de 30 Mg, la cual puede deslizarse a lo largo
-del piso (μ=0.25).  
+de 20 Mg que transporta una carga B de 30 Mg, la cual puede
+deslizarse a lo largo del piso ($\mu = 0.25$).  
 Si se sabe que el carro plataforma estaba en reposo, sin frenos, 
 y que se acopló automáticamente con la locomotora luego del impacto,
 determine la velocidad del carro plataforma
 
-a) Inmediatamente después del impacto
+a) Inmediatamente después del impacto  
 b) Después de que la carga se ha deslizado con relación al carro plataforma hasta llegar a un
 tope.
 
@@ -109,19 +111,45 @@ tope.
 
 Consideramos al sistema que integran A, B, y C como un sistema aislado, 
 puesto que no hay fuerzas externas significativas que afecten a las locomotoras.  
-Si bien el peso de A, B, y C no es nulo, este se ve equilibrado por la normal del suelo.
-Por lo que se anulan y no afectan al movimiento horizontal.
+Si bien el peso de A, B, y C no es nulo, este se ve equilibrado por la normal del suelo, 
+por lo que se anulan y no afectan al movimiento del sistema.
 
 Por lo tanto solo necesitamos considerar el efecto que tienen las partículas entre ellas.
 
-$\dot L = \sum F_{externas}$, y como el sistema es aislado $\sum F_{externas} = 0$ por lo tanto
-$\dot L = 0$ y $L$ es constante (conservación de la cantidad de movimiento lineal).
+#### Diagrama de cuerpo libre de la carga
 
-Debido a la conservación de la cantidad de movimiento lineal, inicialmente $L = m_A*v_A$.  
+![diagrama cuerpo libre ej2](./ej2/dcl_ej2.png ){ width=250px }
+
+Al momento del impacto, la cantidad de movimiento lineal de la carga es
+
+(por segunda ley de newton)
+$$m_1 * v_1 + \int_{t1}^{t2} {F dt} = m_2 * v_2$$
+
+Donde $F = N * \mu = P * 0.25 = 7.5N$
+
+Como la masa no cambia, $m_1 = m_2$.
+
+A esta integral $\int_{t1}^{t2} {F dt}$ la conocemos como el impulso lineal de la fuerza F durante el intervalo de tiempo de t1 a t2.
+
+Si elegimos un intervalo de tiempo que tienda a 0, el impulso también tiende a 0, por lo que la cantidad de movimiento lineal de la carga pasa a ser
+
+$$m * v_1 + 0 = m * v_2$$
+$$\text{(para un tiempo límite } \lim_{t2->t1}{t2-t1} = 0 \text{)}$$
+
+Y como la carga comienza en reposo
+
+$$0 = m * v_2$$
+$$ m \neq 0 \implies v_2 = 0$$
+
+Por lo que podemos ignorar a la carga en el momento del impacto al calcular la cantidad de movimiento lineal del sistema.
+
+$\dot P = \sum F_{externas}$, y como el sistema es aislado $\sum F_{externas} = 0$ por lo tanto
+$\dot P = 0$ y $P$ es constante (conservación de la cantidad de movimiento lineal).
+
+Debido a la conservación de la cantidad de movimiento lineal, inicialmente $P = m_A*v_A$.  
 Luego, aumenta la masa del sistema (se acopla C) y por lo tanto la velocidad disminuye.  
 
-$$L = m_A*v_A = (m_A + m_C) * v_{choque}$$
-(No incluimos la masa de B porque en el instante del choque el movimiento de A no lo afecta.)
+$$P = m_A*v_A = (m_A + m_C) * v_{choque}$$
 
 A partir de esta ecuación despejamos la velocidad del carro plataforma C
 
@@ -130,20 +158,22 @@ $$v_{choque} = {m_A*v_A \over (m_A + m_C)} = {80Mg*6.5{km \over h} \over 80Mg + 
 
 ### apartado b)
 
-Ahora nos encontramos en el momento en que la carga se deslizó con relación al carro plataforma hasta llegar a un tope. Esto quiere decir que la partícula B está en movimiento y la fricción entre B y C actúa hasta que B y C se mueven a la misma velocidad (cuando llega al tope) junto al resto del sistema.
+Ahora nos encontramos en el momento en que la carga se deslizó con relación al carro plataforma hasta llegar a un tope. Esto quiere decir que la partícula B estuvo en movimiento y la fricción entre B y C actuó hasta que B y C comenzaron a moverse a la misma velocidad (cuando llega al tope) junto al resto del sistema.
 
 Por lo tanto, el sistema incorpora la masa de B, y debido a la conservación del movimiento lineal:
 
-$$L = m_A*v_A = (m_A + m_B + m_C) * v_{final}$$
+$$P = m_A*v_A = (m_A + m_B + m_C) * v_{final}$$
 
 Despejando la velocidad final del carro plataforma
 
 $$v_{final} = {m_A*v_A \over (m_A + m_B + m_C)} = {80Mg*6.5{km \over h} \over 80Mg + 30Mg + 20Mg}
              = 4{km \over h}$$
 
+\newpage
+
 # Ejercicio 3
 
-![alt text](ej3/Imagen_0_ejercicio.PNG )
+![enunciado ej3](ej3/Imagen_0_ejercicio.PNG )
 
 ### Parte 1
 
@@ -176,12 +206,11 @@ la velocidad angular del CRI se puede calcular y es:
 
 $$\omega = \frac{v_A} {L\cos(\theta)}$$
 
-![alt text](ej3/Imagen_1_CRI.PNG )
+![diagrama del CRI](ej3/Imagen_1_CRI.PNG ){ width=250px }
 
 sabiendo esto tenemos (por teorema del seno) que:
 
 $$\frac{L\omega^2}{cos(\theta)} = a_B$$
-
 
 También podemos obtener la aceleración tangencial :
 
@@ -195,14 +224,15 @@ $$I = \frac{1}{12} * m * L^2$$
 
 Fuente para momento de inercia de la vara (problema resuelto 16.10 del libro):
 
-![alt text](ej3/Imagen_2_texto.PNG )
+![cinetica del movimiento](ej3/Imagen_2_texto.PNG ){ width=350px }
 
+![momento de inercia de la barra](ej3/Imagen_3_Inercia.PNG ){ width=150px }
 
-![alt text](ej3/Imagen_3_Inercia.PNG )
+\newpage
 
 Y entonces podemos plantear lo siguiente:
 
-![alt text](ej3/Imagen_4_Igualdad.PNG )
+![diagrama del movimiento de la barra](ej3/Imagen_4_Igualdad.PNG ){ width=350px }
 
 De lo cual podemos concluir:
 
@@ -220,7 +250,7 @@ Para eso vamos a utilizar el código realizado y indicaremos cuando $N_B$ es 0.
 
 Los resultados entonces son los siguientes:
 
-![alt text](ej3/Imagen_5_original.PNG )
+![Grafica del angulo de separacion con 15m/s](ej3/Imagen_5_original.PNG ){ width=450px }
 
 
 # ...¿Que pasó?
@@ -229,4 +259,4 @@ Luego de discutirlo con un par de compañeros, llegamos a la conclusión de que 
 
 Si tenemos en cuenta el error y ponemos la velocidad del ejercicio en inglés, tenemos:
 
-![alt text](ej3/Imagen_6_correcto.PNG )
+![Grafica del angulo de separacion con 1.5m/s](ej3/Imagen_6_correcto.PNG ){ width=450px }
